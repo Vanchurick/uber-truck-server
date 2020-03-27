@@ -1,0 +1,10 @@
+{
+  "dbConfig": {
+    "name": "DB_USER_NAME",
+    "password": "DB_USER_PASSWORD",
+    "dbName": "DB_NAME"
+  },
+  "appConfig": {
+    "port": "APP_PORT"
+  }
+}

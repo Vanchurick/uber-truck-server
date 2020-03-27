@@ -1,0 +1,30 @@
+{
+  "name": "uber-truck-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vanchurick/uber-truck-server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vanchurick/uber-truck-server/issues"
+  },
+  "homepage": "https://github.com/Vanchurick/uber-truck-server#readme",
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "config": "^3.3.1",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.6"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-google": "^0.14.0"
+  }
+}
