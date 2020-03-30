@@ -2,10 +2,13 @@ const express = require("express");
 const app = express();
 
 const router = require("./routes/router");
+const log = require("./routes/middlewares/log");
 
 const startServer = (port) => {
   app.use(express.json());
-  app.use("/", router);
+  app.use(log);
+
+  app.use("/api", router);
 
   app.listen(port);
 
