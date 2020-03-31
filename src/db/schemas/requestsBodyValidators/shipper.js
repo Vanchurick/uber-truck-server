@@ -13,16 +13,16 @@ const schema = Joi.object({
     .max(30)
     .required(),
 
-  password: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{3,30}$")),
+  password: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{3,30}$")).required(),
 
-  phone: Joi.string().pattern(new RegExp(/\d{11}/)),
+  phone: Joi.string().pattern(new RegExp(/\d{11}/)).required(),
 
   email: Joi.string().email({
     minDomainSegments: 2,
     tlds: {allow: ["com", "net"]},
-  }),
+  }).required(),
 
-  shipper: Joi.boolean().truthy("Y"),
+  shipper: Joi.boolean().truthy("Y").required(),
 });
 
 module.exports = schema;

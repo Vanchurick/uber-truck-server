@@ -5,6 +5,8 @@
     "dbName": "DB_NAME"
   },
   "appConfig": {
-    "port": "APP_PORT"
+    "port": "APP_PORT",
+    "secret": "SECRET",
+    "saltPassword": "SALT_PASSWORD"
   }
 }

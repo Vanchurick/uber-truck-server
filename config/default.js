@@ -6,5 +6,7 @@ module.exports = {
   },
   appConfig: {
     port: 2306,
+    secret: "nosecret",
+    saltPassword: 2,
   },
 };
