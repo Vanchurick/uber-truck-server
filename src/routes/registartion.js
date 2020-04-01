@@ -1,11 +1,10 @@
 const path = require("path");
 const jwt = require("jsonwebtoken");
 const config = require("config");
-const Driver = require("../../db/schemas/driver.js");
-const Shipper = require("../../db/schemas/shipper");
+const Driver = require("../db/schemas/driver.js");
+const Shipper = require("../db/schemas/shipper");
 const driverValidator = require(path.resolve(
   __dirname,
-  "..",
   "..",
   "db",
   "schemas",
@@ -16,17 +15,30 @@ const driverValidator = require(path.resolve(
 const shipperValidator = require(path.resolve(
   __dirname,
   "..",
-  "..",
   "db",
   "schemas",
   "requestsBodyValidators",
   "shipper",
 ));
-const cryptPassword = require("../../helpers/cryptPassword");
+const cryptPassword = require("../helpers/cryptPassword");
+const isUserExist = require("../helpers/isUserExist");
 
 const registration = async (req, res) => {
-  const {driver, shipper} = req.body;
+  const {driver, shipper, email} = req.body;
   const secret = config.get("appConfig.secret");
+
+  const userExist = await isUserExist(email);
+
+  if (userExist) {
+    const resp = {
+      status: "User have not been created",
+      message: `${email} is busy`,
+    };
+
+    res.writeHead(200, {"Content-Type": "application/json"});
+    res.end(JSON.stringify(resp));
+    return;
+  }
 
   if (driver) {
     const validation = driverValidator.validate(req.body);
@@ -43,12 +55,16 @@ const registration = async (req, res) => {
     }
 
     const userDriver = req.body;
+
     userDriver.password = cryptPassword(req.body.password);
 
     await Driver.create(userDriver)
       .then((result) => {
-        const jwtToken = jwt.sign(JSON.stringify(result), secret);
         const {trucks, _id, name, surname, phone, email} = result;
+        const jwtToken = jwt.sign(
+          JSON.stringify({trucks, _id, name, surname, phone, email}),
+          secret,
+        );
 
         const resp = {
           status: "Driver have been created",
@@ -82,8 +98,11 @@ const registration = async (req, res) => {
 
     await Shipper.create(req.body)
       .then((result) => {
-        const jwtToken = jwt.sign(JSON.stringify(result), secret);
         const {loads, _id, name, surname, phone, email} = result;
+        const jwtToken = jwt.sign(
+          JSON.stringify({loads, _id, name, surname, phone, email}),
+          secret,
+        );
 
         const resp = {
           status: "Shipper have been created",
