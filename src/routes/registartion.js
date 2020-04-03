@@ -60,15 +60,22 @@ const registration = async (req, res) => {
 
     await Driver.create(userDriver)
       .then((result) => {
-        const {trucks, _id, name, surname, phone, email} = result;
+        const {_id, name, surname, phone, email} = result;
         const jwtToken = jwt.sign(
-          JSON.stringify({trucks, _id, name, surname, phone, email}),
+          JSON.stringify({
+            _id,
+            name,
+            surname,
+            phone,
+            email,
+            driver: true,
+          }),
           secret,
         );
 
         const resp = {
           status: "Driver have been created",
-          user: {trucks, _id, name, surname, phone, email},
+          user: {_id, name, surname, phone, email},
           jwtToken,
         };
 
@@ -98,15 +105,22 @@ const registration = async (req, res) => {
 
     await Shipper.create(req.body)
       .then((result) => {
-        const {loads, _id, name, surname, phone, email} = result;
+        const {_id, name, surname, phone, email} = result;
         const jwtToken = jwt.sign(
-          JSON.stringify({loads, _id, name, surname, phone, email}),
+          JSON.stringify({
+            _id,
+            name,
+            surname,
+            phone,
+            email,
+            shipper: true,
+          }),
           secret,
         );
 
         const resp = {
           status: "Shipper have been created",
-          user: {loads, _id, name, surname, phone, email},
+          user: {_id, name, surname, phone, email},
           jwtToken,
         };
 
