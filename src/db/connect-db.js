@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+mongoose.set("useFindAndModify", false);
 
 const connectToDB = (name, password, dbName) => {
   const dbUrl = `mongodb+srv://${name}:${password}@uber-truck-fhdkm.mongodb.net/${dbName}?retryWrites=true&w=majority`;

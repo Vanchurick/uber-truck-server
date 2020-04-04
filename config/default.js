@@ -9,4 +9,9 @@ module.exports = {
     secret: "nosecret",
     saltPassword: 2,
   },
+  emailConfig: {
+    service: "gmail",
+    email: "ubertruckservice@gmail.com",
+    password: "Suttus04",
+  },
 };

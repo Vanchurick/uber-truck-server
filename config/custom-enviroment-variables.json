@@ -8,5 +8,10 @@
     "port": "APP_PORT",
     "secret": "SECRET",
     "saltPassword": "SALT_PASSWORD"
+  },
+  "emailConfig": {
+    "service": "EMAIL_SERVICE",
+    "email": "EMAIL_ADRESS",
+    "password": "EMAIL_PASSWORD"
   }
 }
