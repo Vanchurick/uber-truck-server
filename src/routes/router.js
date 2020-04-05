@@ -11,6 +11,8 @@ const addTruck = require("./addTruck");
 const getTrucks = require("./getTrucks");
 const editTruck = require("./editTruck");
 
+const addLoad = require("./addLoad");
+
 apiRoutes.post("/auth", registartion);
 apiRoutes.post("/login", login);
 
@@ -21,5 +23,7 @@ apiRoutes.post("/user/reset-password/code", changePassword);
 apiRoutes.post("/create-truck", addTruck);
 apiRoutes.get("/trucks", getTrucks);
 apiRoutes.put("/truck/:id", editTruck);
+
+apiRoutes.post("/create-load", addLoad);
 
 module.exports = apiRoutes;
