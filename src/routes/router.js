@@ -8,6 +8,8 @@ const user = require("./user");
 const resetPassword = require("./resetPassword");
 const changePassword = require("./changePassword");
 const addTruck = require("./addTruck");
+const getTrucks = require("./getTrucks");
+const editTruck = require("./editTruck");
 
 apiRoutes.post("/auth", registartion);
 apiRoutes.post("/login", login);
@@ -17,5 +19,7 @@ apiRoutes.get("/user", user);
 apiRoutes.get("/user/reset-password", resetPassword);
 apiRoutes.post("/user/reset-password/code", changePassword);
 apiRoutes.post("/create-truck", addTruck);
+apiRoutes.get("/trucks", getTrucks);
+apiRoutes.put("/truck/:id", editTruck);
 
 module.exports = apiRoutes;
