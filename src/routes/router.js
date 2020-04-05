@@ -7,6 +7,7 @@ const login = require("./login");
 const user = require("./user");
 const resetPassword = require("./resetPassword");
 const changePassword = require("./changePassword");
+const addTruck = require("./addTruck");
 
 apiRoutes.post("/auth", registartion);
 apiRoutes.post("/login", login);
@@ -15,5 +16,6 @@ apiRoutes.use(auth);
 apiRoutes.get("/user", user);
 apiRoutes.get("/user/reset-password", resetPassword);
 apiRoutes.post("/user/reset-password/code", changePassword);
+apiRoutes.post("/create-truck", addTruck);
 
 module.exports = apiRoutes;

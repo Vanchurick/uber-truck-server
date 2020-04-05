@@ -7,7 +7,6 @@ const driverSchema = new Schema({
   phone: String,
   email: String,
   password: String,
-  trucks: Array,
 });
 
 const Driver = mongoose.model("Drivers", driverSchema);

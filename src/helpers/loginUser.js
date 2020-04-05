@@ -3,8 +3,10 @@ const Shipper = require("../db/schemas/shipper");
 const bcrypt = require("bcrypt");
 
 module.exports = async (email, password) => {
-  const driver = await Driver.findOne({email}, function(err, adventure) {
-    console.log(err);
+  const driver = await Driver.findOne({email}, (err, adventure) => {
+    if (err) {
+      console.log(err);
+    }
   });
 
   if (driver) {
@@ -14,8 +16,10 @@ module.exports = async (email, password) => {
     }
   }
 
-  const shipper = await Shipper.findOne({email}, function(err, adventure) {
-    console.log(err);
+  const shipper = await Shipper.findOne({email}, (err, adventure) => {
+    if (err) {
+      console.log(err);
+    }
   });
 
   if (shipper) {

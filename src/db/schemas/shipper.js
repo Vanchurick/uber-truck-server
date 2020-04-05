@@ -7,7 +7,6 @@ const shipperSchema = new Schema({
   phone: String,
   email: String,
   password: String,
-  loads: Array,
 });
 
 const Shipper = mongoose.model("Shipers", shipperSchema);
