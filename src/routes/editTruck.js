@@ -9,7 +9,6 @@ const editTruckValidator = require(path.resolve(
 ));
 const assignTruck = require("../helpers/assignTruck");
 const updateTruck = require("../helpers/updateTruck");
-const Truck = require("../db/schemas/truck");
 
 const OPERATION = {
   ASSIGN: "assign",
@@ -50,28 +49,6 @@ const editTruck = async (req, res) => {
     res.writeHead(200, {"Content-Type": "application/json"});
     res.end(JSON.stringify(updatedTruck));
     return;
-  }
-
-  if (operation === OPERATION.REMOVE) {
-    const truck = await Truck.findById(id);
-
-    if (truck.assigned_to === _id) {
-      res.writeHead(200, {"Content-Type": "application/json"});
-      res.end(JSON.stringify({status: "Truck is assigned to driver"}));
-      return;
-    }
-
-    await Truck.findByIdAndRemove(id, (err) => {
-      if (err) {
-        res.writeHead(404, {"Content-Type": "application/json"});
-        res.end(JSON.stringify(err));
-        return;
-      }
-
-      res.writeHead(200, {"Content-Type": "application/json"});
-      res.end(JSON.stringify({status: "Truck have been removed"}));
-      return;
-    });
   }
 };
 

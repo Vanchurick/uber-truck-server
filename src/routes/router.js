@@ -10,6 +10,7 @@ const changePassword = require("./changePassword");
 const addTruck = require("./addTruck");
 const getTrucks = require("./getTrucks");
 const editTruck = require("./editTruck");
+const deleteTruck = require("./deleteTruck");
 
 const addLoad = require("./addLoad");
 const getLoads = require("./getLoads");
@@ -24,6 +25,7 @@ apiRoutes.post("/user/reset-password/code", changePassword);
 apiRoutes.post("/create-truck", addTruck);
 apiRoutes.get("/trucks", getTrucks);
 apiRoutes.put("/truck/:id", editTruck);
+apiRoutes.delete("/truck/:id", deleteTruck);
 
 apiRoutes.post("/create-load", addLoad);
 apiRoutes.get("/loads", getLoads);
