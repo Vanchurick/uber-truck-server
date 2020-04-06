@@ -3,7 +3,7 @@ const {Schema} = mongoose;
 
 const loadSchema = new Schema({
   created_by: String,
-  logs: {message: String, time: String, date: String},
+  logs: [{message: String, time: String, date: String}],
   assigned_to: String,
   status: String,
   state: String,

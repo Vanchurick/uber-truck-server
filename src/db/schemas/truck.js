@@ -8,6 +8,7 @@ const truckSchema = new Schema({
   type: String,
   dimensions: {width: Number, length: Number, height: Number},
   payload: Number,
+  load: String,
 });
 
 const Truck = mongoose.model("Trucks", truckSchema);

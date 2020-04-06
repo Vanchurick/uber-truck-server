@@ -13,7 +13,6 @@ const updateTruck = require("../helpers/updateTruck");
 const OPERATION = {
   ASSIGN: "assign",
   UPDATE: "update",
-  REMOVE: "remove",
 };
 
 const editTruck = async (req, res) => {

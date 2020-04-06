@@ -11,9 +11,12 @@ const addTruck = require("./addTruck");
 const getTrucks = require("./getTrucks");
 const editTruck = require("./editTruck");
 const deleteTruck = require("./deleteTruck");
+const getDriverLoads = require("./getDriverLoads");
 
 const addLoad = require("./addLoad");
 const getLoads = require("./getLoads");
+const deleteLoad = require("./deleteLoad");
+const editLoad = require("./editLoad");
 
 apiRoutes.post("/auth", registartion);
 apiRoutes.post("/login", login);
@@ -26,8 +29,11 @@ apiRoutes.post("/create-truck", addTruck);
 apiRoutes.get("/trucks", getTrucks);
 apiRoutes.put("/truck/:id", editTruck);
 apiRoutes.delete("/truck/:id", deleteTruck);
+apiRoutes.get("/driver/loads", getDriverLoads);
 
 apiRoutes.post("/create-load", addLoad);
 apiRoutes.get("/loads", getLoads);
+apiRoutes.delete("/load/:id", deleteLoad);
+apiRoutes.put("/load/:id", editLoad);
 
 module.exports = apiRoutes;

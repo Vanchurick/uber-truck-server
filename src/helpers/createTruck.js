@@ -9,7 +9,7 @@ const TRUCK_TYPES = {
   },
   ls: {
     dimensions: {width: 350, length: 700, height: 200},
-    payload: 1700,
+    payload: 4000,
   },
 };
 
@@ -18,6 +18,7 @@ module.exports = (id, type) => {
     created_by: id,
     assigned_to: "",
     status: "is",
+    load: "",
     type,
     dimensions: TRUCK_TYPES[type].dimensions,
     payload: TRUCK_TYPES[type].payload,

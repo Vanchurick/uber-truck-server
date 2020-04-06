@@ -1,10 +1,14 @@
 const Joi = require("@hapi/joi");
 
 const schema = Joi.object({
-  operation: Joi.string().pattern(new RegExp("assign|update")).required(),
+  operation: Joi.string().pattern(new RegExp("post|update")).required(),
 
   data: Joi.object({
-    type: Joi.string().pattern(new RegExp("sprinter|ss|ls")),
+    logs: Joi.object({
+      message: Joi.string(),
+      time: Joi.string(),
+      date: Joi.string(),
+    }),
     dimensions: Joi.object({
       width: Joi.number(),
       length: Joi.number(),
