@@ -5,6 +5,7 @@ const loadSchema = new Schema({
   created_by: String,
   logs: [{message: String, time: String, date: String}],
   assigned_to: String,
+  truck: String,
   status: String,
   state: String,
   dimensions: {width: Number, length: Number, height: Number},

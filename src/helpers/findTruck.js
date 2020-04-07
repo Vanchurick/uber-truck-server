@@ -45,6 +45,7 @@ module.exports = async (load) => {
         status: "assigned",
         state: "En route to pick up",
         assigned_to: truck.created_by,
+        truck: truck._id,
         logs: [
           ...load.logs,
           {message: `Assigned to ${truck.created_by}`, time: Date.now()},
