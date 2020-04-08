@@ -1,6 +1,191 @@
 [
   {
     "type": "post",
+    "url": "/create-truck",
+    "title": "Create truck",
+    "name": "CreateTruck",
+    "group": "Driver",
+    "description": "<p>Create truck</p>",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "http://localhost:2306/api/create-truck",
+        "type": "js"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Users unique token &quot;Bearer <code>token</code>&quot;.</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "type",
+            "description": "<p>Type of truck: <code>sprinter</code>, <code>ss</code>,<code>ls</code></p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n \"type\": \"sprinter\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>Request status</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "result",
+            "description": "<p>Created truck</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": " HTTP/1.1 200 OK\n{\n \"status\": \"Truck have been created\",\n \"result\": {\n   \"_id\": \"5e8dab588154171ae838d6a1\",\n   \"created_by\": \"5e8cc742ada9582a7431ecf2\",\n   \"assigned_to\": \"\",\n   \"status\": \"is\",\n   \"load\": \"\",\n   \"type\": \"sprinter\",\n   \"dimensions\": {\n       \"width\": 250,\n       \"length\": 300,\n       \"height\": 170\n   },\n   \"payload\": 1700,\n   \"__v\": 0\n   }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ValidationError",
+            "description": "<p>Error request body validation</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "DataBaseError",
+            "description": "<p>Error in changing password in data base</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "  HTTP/1.1 400 ValidationError error\n{\n  status: \"Bad request\",\n  error: {Object},\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "  HTTP/1.1 404 DataBaseError error\n{\nstatus: \"Truck has not been created\",\nerror: {Object}\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/addTruck.js",
+    "groupTitle": "Driver"
+  },
+  {
+    "type": "get",
+    "url": "/trucks",
+    "title": "Get trucks",
+    "name": "GetTrucks",
+    "group": "Driver",
+    "description": "<p>Get list all created truck by driver</p>",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "http://localhost:2306/api/trucks",
+        "type": "js"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Users unique token &quot;Bearer <code>token</code>&quot;.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>Request status</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": false,
+            "field": "truck",
+            "description": "<p>Created trucks</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n {\n  \"status\": \"Trucks in DB\",\n  \"trucks\": [\n     {\n         \"dimensions\": {\n             \"width\": 350,\n             \"length\": 700,\n             \"height\": 200\n         },\n         \"_id\": \"5e8cc757ada9582a7431ecf3\",\n         \"created_by\": \"5e8cc742ada9582a7431ecf2\",\n         \"assigned_to\": \"\",\n         \"status\": \"is\",\n         \"load\": \"\",\n         \"type\": \"ls\",\n         \"payload\": 4000,\n         \"__v\": 0\n     }\n  ]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ValidationError",
+            "description": "<p>Error request body validation</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "  HTTP/1.1 404 ValidationError error\n{\n  status: \"Database error\",\n  error: {Object},\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/getTrucks.js",
+    "groupTitle": "Driver"
+  },
+  {
+    "type": "post",
     "url": "/login",
     "title": "Login user",
     "name": "LoginUser",
