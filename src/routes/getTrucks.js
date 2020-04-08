@@ -35,7 +35,7 @@ module.exports = getTrucks;
  * "Bearer <code>token</code>".
  *
  * @apiSuccess {String} status  Request status
- * @apiSuccess {Array} truck  Created trucks
+ * @apiSuccess {Array} trucks  Created trucks
  *
  *
  * @apiSuccessExample {json} Success-Response:

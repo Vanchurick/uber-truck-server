@@ -1,5 +1,123 @@
 [
   {
+    "type": "put",
+    "url": "/driver/load/:id",
+    "title": "Change load status",
+    "name": "ChangeLoadStatus",
+    "group": "Driver",
+    "description": "<p>Chage load status by driver atpu: &quot;Arrived to Pick Up&quot;, ertd: &quot;En route to delivery&quot;, atd: &quot;Arrived to delivery&quot;,</p>",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "http://localhost:2306/api/driver/load/5e8b8c68b3ee152dd4dc73f9",
+        "type": "js"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Users unique token &quot;Bearer <code>token</code>&quot;.</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "state",
+            "description": "<p>New state of load <code>atpu</code> or <code>ertd</code> or <code>atd</code></p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n \"state\":  \"atpu\",\n }",
+          "type": "json"
+        },
+        {
+          "title": "Request-Example:",
+          "content": "{\n \"state\":  \"ertd\",\n }",
+          "type": "json"
+        },
+        {
+          "title": "Request-Example:",
+          "content": "{\n \"state\":  \"atd\",\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>Request status</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "load",
+            "description": "<p>Updated load</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n {\n   \"status\": \"Success\",\n   \"load\": {\n       \"dimensions\": {\n          \"width\": 50,\n          \"length\": 100,\n          \"height\": 50\n      },\n      \"_id\": \"5e8cc7c1ada9582a7431ecf5\",\n      \"created_by\": \"5e8cc7a0ada9582a7431ecf4\",\n      \"assigned_to\": \"5e8cc742ada9582a7431ecf2\",\n      \"truck\": \"5e8cc757ada9582a7431ecf3\",\n      \"status\": \"shipped\",\n      \"state\": \"Arrived to delivery\",\n      \"logs\": [\n          {\n              \"_id\": \"5e8cc7c1ada9582a7431ecf6\",\n              \"message\": \"Created\",\n              \"time\": \"1586284481489\"\n          },\n          {\n              \"_id\": \"5e8cc7f6ada9582a7431ecf7\",\n              \"message\": \"Posted\",\n              \"time\": \"1586284534666\"\n          },\n          {\n              \"_id\": \"5e8cc7f6ada9582a7431ecfa\",\n              \"message\": \"Assigned to 5e8cc742ada9582a7431ecf2\",\n              \"time\": \"1586284534889\"\n          }\n      ],\n      \"payload\": 3000,\n      \"__v\": 0\n  }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ValidationError",
+            "description": "<p>Error request body validation</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "DatabAseError",
+            "description": "<p>Some error in database</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "  HTTP/1.1 400 ValidationError error\n{\n  status: \"Bad request\",\n  error: {Object},\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "  HTTP/1.1 404 DataBaseError error\n{\n  status: \"Database Error\",\n  error: {Object},\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/changeLoadStatus.js",
+    "groupTitle": "Driver"
+  },
+  {
     "type": "post",
     "url": "/create-truck",
     "title": "Create truck",
@@ -108,6 +226,276 @@
     "groupTitle": "Driver"
   },
   {
+    "type": "delete",
+    "url": "/truck/:id",
+    "title": "Delete Truck",
+    "name": "DeleteTruck",
+    "group": "Driver",
+    "description": "<p>Delete truck</p>",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "http://localhost:2306/api/truck/5e8cc757ada9582a7431ecf3",
+        "type": "js"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Users unique token &quot;Bearer <code>token</code>&quot;.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>Request status</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "   HTTP/1.1 200 OK\n{\n  \"status\": \"Truck have been removed\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "DatabAseError",
+            "description": "<p>Sone error in database</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "AssignedError",
+            "description": "<p>Truck has status assigned and can`t be removed</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "  HTTP/1.1 404 DataBaseError error\n{\n  status: \"Database Error\",\n  error: {Object},\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "  HTTP/1.1 404 AssignedError error\n{\n  status: \"Truck is assigned to driver\",\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/deleteTruck.js",
+    "groupTitle": "Driver"
+  },
+  {
+    "type": "put",
+    "url": "/truck/:id",
+    "title": "Edit Truck",
+    "name": "EditTruck",
+    "group": "Driver",
+    "description": "<p>Edit truck</p>",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "http://localhost:2306/api/truck/5e8cc757ada9582a7431ecf3",
+        "type": "js"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Users unique token &quot;Bearer <code>token</code>&quot;.</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "operation",
+            "description": "<p>Type of operation <code>update</code> or <code>assign</code></p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "data",
+            "description": "<p>Data for editing</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n \"operation\":  \"update\",\n \"data\": {\n         \"payload\": 2000\n         },\n}",
+          "type": "json"
+        },
+        {
+          "title": "Request-Example:",
+          "content": "{\n \"operation\":  \"assign\",\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>Request status</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "truck",
+            "description": "<p>Updated truck</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "   HTTP/1.1 200 OK\n{\n  \"status\": \"Success update\",\n  \"truck\": {\n     \"dimensions\": {\n         \"width\": 350,\n         \"length\": 700,\n         \"height\": 200\n     },\n     \"_id\": \"5e8cc757ada9582a7431ecf3\",\n     \"created_by\": \"5e8cc742ada9582a7431ecf2\",\n     \"assigned_to\": \"\",\n     \"status\": \"is\",\n     \"load\": \"\",\n     \"type\": \"ls\",\n     \"payload\": 2000,\n     \"__v\": 0\n  }\n}",
+          "type": "json"
+        },
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n\n{\n \"status\": \"Success assign\",\n   \"truck\": {\n       \"dimensions\": {\n           \"width\": 350,\n           \"length\": 700,\n           \"height\": 200\n       },\n       \"_id\": \"5e8cc757ada9582a7431ecf3\",\n       \"created_by\": \"5e8cc742ada9582a7431ecf2\",\n       \"assigned_to\": \"5e8cc742ada9582a7431ecf2\",\n       \"status\": \"is\",\n       \"load\": \"\",\n       \"type\": \"ls\",\n       \"payload\": 2000,\n       \"__v\": 0\n   }\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ValidationError",
+            "description": "<p>Error request body validation</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "  HTTP/1.1 404 ValidationError error\n{\n  status: \"Bad request\",\n  error: {Object},\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/editTruck.js",
+    "groupTitle": "Driver"
+  },
+  {
+    "type": "get",
+    "url": "/driver/loads",
+    "title": "Get Loads",
+    "name": "GetLoads",
+    "group": "Driver",
+    "description": "<p>Get loads for driver</p>",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "http://localhost:2306/api/driver/loads",
+        "type": "js"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Users unique token &quot;Bearer <code>token</code>&quot;.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>Request status</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n {\n  \"status\": \"Success\",\n  \"loads\": [\n      {\n          \"dimensions\": {\n              \"width\": 50,\n              \"length\": 100,\n              \"height\": 50\n          },\n          \"_id\": \"5e8cc7c1ada9582a7431ecf5\",\n          \"created_by\": \"5e8cc7a0ada9582a7431ecf4\",\n          \"assigned_to\": \"5e8cc742ada9582a7431ecf2\",\n          \"truck\": \"5e8cc757ada9582a7431ecf3\",\n          \"status\": \"shipped\",\n          \"state\": \"Arrived to delivery\",\n          \"logs\": [\n              {\n                  \"_id\": \"5e8cc7c1ada9582a7431ecf6\",\n                  \"message\": \"Created\",\n                  \"time\": \"1586284481489\"\n              },\n              {\n                  \"_id\": \"5e8cc7f6ada9582a7431ecf7\",\n                  \"message\": \"Posted\",\n                  \"time\": \"1586284534666\"\n              },\n              {\n                  \"_id\": \"5e8cc7f6ada9582a7431ecfa\",\n                  \"message\": \"Assigned to 5e8cc742ada9582a7431ecf2\",\n                  \"time\": \"1586284534889\"\n              }\n          ],\n          \"payload\": 3000,\n          \"__v\": 0\n      }\n  ]\n}",
+          "type": "json"
+        },
+        {
+          "title": "Success-Response:",
+          "content": " HTTP/1.1 200 OK\n{\n status: \"No loads\",\n loads: []\n }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "DatabAseError",
+            "description": "<p>Some error in database</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "  HTTP/1.1 404 DataBaseError error\n{\n  status: \"Database Error\",\n  error: {Object},\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/getDriverLoads.js",
+    "groupTitle": "Driver"
+  },
+  {
     "type": "get",
     "url": "/trucks",
     "title": "Get trucks",
@@ -148,7 +536,7 @@
             "group": "Success 200",
             "type": "Array",
             "optional": false,
-            "field": "truck",
+            "field": "trucks",
             "description": "<p>Created trucks</p>"
           }
         ]
