@@ -99,7 +99,7 @@
         },
         {
           "title": "Error-Response:",
-          "content": " HTTP/1.1 404 NoUser error\n{\n  status: \"No such user or wrong passport\",\n  error: {object},\n}",
+          "content": " HTTP/1.1 404 NoUser error\n{\n  status: \"No such user or wrong passport\",\n  error: {Object},\n}",
           "type": "json"
         }
       ]
@@ -261,6 +261,242 @@
     },
     "version": "0.0.0",
     "filename": "src/routes/registartion.js",
+    "groupTitle": "User"
+  },
+  {
+    "type": "get",
+    "url": "/user/reset-password",
+    "title": "Reset user password",
+    "name": "ResetPassword",
+    "group": "User",
+    "description": "<p>Change user password when you login is system.</p>",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "http://localhost:2306/api/user/reset-password",
+        "type": "js"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Users unique token &quot;Bearer <code>token</code>&quot;.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>Request status</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": " HTTP/1.1 200 OK\n{\n \"status\": \"Email have been sent\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "EmailSentError",
+            "description": "<p>Some error with sent email</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": " HTTP/1.1 404 EmailSentError error\n{\n  status: \"Email have not been sent\",\n  error: {Object},\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/resetPassword.js",
+    "groupTitle": "User"
+  },
+  {
+    "type": "post",
+    "url": "/user/reset-password/code",
+    "title": "Send secret code",
+    "name": "SendSecretCode",
+    "group": "User",
+    "description": "<p>Send secret code from email and new password of user.</p>",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "http://localhost:2306/api/reset-password",
+        "type": "js"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Users unique token &quot;Bearer <code>token</code>&quot;.</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "secret",
+            "description": "<p>Secret code from email</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "newPassword",
+            "description": "<p>New password</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n \"secret\": \"Jd1yFSr3m\",\n \"newPassword\": \"hello\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>Request status</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": " HTTP/1.1 200 OK\n{\n status: \"Password have been changed\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "SecretCodeError",
+            "description": "<p>Incorect secret code</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "DataBaseError",
+            "description": "<p>Error in changing password in data base</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "  HTTP/1.1 404 SecretCodeError error\n{\n  status: \"Password have note been changed\",\n  message: \"Incorect secret code\",\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "  HTTP/1.1 404 SecretCodeError error\n{\nstatus: \"Password have not been changed\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/changePassword.js",
+    "groupTitle": "User"
+  },
+  {
+    "type": "get",
+    "url": "/user",
+    "title": "Get user info",
+    "name": "UserInfo",
+    "group": "User",
+    "description": "<p>Get user info.</p>",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "http://localhost:2306/api/user",
+        "type": "js"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Users unique token &quot;Bearer <code>token</code>&quot;.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>Request status</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "user",
+            "description": "<p>Created user.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": " HTTP/1.1 200 OK\n{\n    \"name\": \"Driver1\",\n    \"surname\": \"Driver1\",\n    \"phone\": \"80500307536\",\n    \"email\": \"driver1@gmail.com\"\n   }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/user.js",
     "groupTitle": "User"
   }
 ]
